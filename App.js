@@ -16,5 +16,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFE229',
     alignItems: 'center',
     justifyContent: 'center',
+    color: '#FFF29E'
   },
 });
