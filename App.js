@@ -1,51 +1,44 @@
-import { StatusBar } from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
+import GoalInput from './components.js/Goalinput';
+import GoalItem from './components.js/Goalitem';
 
 export default function App() {
-  const [enteredGoalText, setEnteredGoalText] = useState('')
   const [goals, setGoals] = useState([])
-  function handleInputGoal(enteredText){
-    console.log(enteredText)
-    setEnteredGoalText(enteredText)
+  
+  function handleAddGoal(enteredGoalText) {
+    console.log(enteredGoalText)
+    setGoals(()=>[...goals, {text: enteredGoalText}])
+  }
+  
+  function handleDeleteGoal(){
+    console.log("DELETE")
   }
 
-function handleAddGoal() {
-  console.log (enteredGoalText)
-  setGoals(()=>[...goals, {text: enteredGoalText, key: Math.random().toString()}])
-}
-
   return(
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-        style={styles.textInput}
-        placeholder='Your Goal!'
-        oneChangeText={handleInputGoal} />
-        <Button
-        title='Add Goal'
-        color={'#FFF636'}
-        onPress={handleAddGoal}
+  <View style={styles.container}>
+    <GoalInput
+    onAddGoal={handleAddGoal}
+    />
+    <View style={styles.goalsContiner}>
+      <FlatList
+      data={goals}
+      renderItem={ (itemData) => {
+        <GoalItem
+        itemData={itemData}
+        OnDeLeteItem={handleDeleteAddGoal}
         />
-        <View style={styles.goalsContiner}>
-          <FlatList
-          data={goals}
-          renderItem={ (itemData) => {
+      }}
 
-            <View style={styles.goalsItem}>
-              <Text style={styles.goalsText}>
-            
-              </Text>
-              </View>
-          }}
-          >
-
-          </FlatList>
-        </View>
-      </View>
+      keyExtractor={(item) => {
+        return item.id
+      }}
+      />
     </View>
-  )
+  </View>  
+  );
 }
+
   const styles = StyleSheet.create({
     container:{
       flex: 1,
@@ -65,7 +58,7 @@ function handleAddGoal() {
       borderRadius: 20,
       backgraundColor: '#F8FF6E',
     },
-    textImput:{
+    textInput:{
       borderWith: 1,
       borderColor: '#ffffff',
       width: '80%',
