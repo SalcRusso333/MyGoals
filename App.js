@@ -8,7 +8,7 @@ export default function App() {
   
   function handleAddGoal(enteredGoalText) {
     console.log(enteredGoalText)
-    setGoals(()=>[...goals, {text: enteredGoalText}])
+ setGoals(()=>[...goals, {text: enteredGoalText, key: Math.random().toString()}])
   }
   
   function handleDeleteGoal(){
@@ -21,18 +21,17 @@ export default function App() {
     onAddGoal={handleAddGoal}
     />
     <View style={styles.goalsContiner}>
+
       <FlatList
       data={goals}
       renderItem={ (itemData) => {
+        return(
         <GoalItem
         itemData={itemData}
-        OnDeLeteItem={handleDeleteAddGoal}
-        />
+        OnDeleteItem={handleDeleteGoal}
+        />)
       }}
 
-      keyExtractor={(item) => {
-        return item.id
-      }}
       />
     </View>
   </View>  

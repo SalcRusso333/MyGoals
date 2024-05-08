@@ -17,16 +17,16 @@ function GoalInput({onAddGoal}){
 
     return(
         <View style={styles.inputContainer}>
-            <TextInput
-            style={styles.textInput}
-            placeholder="Your Goal!"
-            onChangeText={handleInputGoal}
-            value={enteredGoalText}
+            <TextInput 
+                style={styles.textInput}
+                placeholder='Your Goal!'
+                onChangeText={handleInputGoal}
+                value={enteredGoalText}
             />
-            <Button
-            title="Add Goal"
-            color={'#FFF636'}
-            onPress={addGoalHandler}
+            <Button 
+                title='Add Goal'
+                color={'#F8FF6E'}
+                onPress={addGoalHandler}
             />
         </View>
     )
