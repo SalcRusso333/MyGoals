@@ -11,10 +11,11 @@ export default function App() {
  setGoals(()=>[...goals, {text: enteredGoalText, key: Math.random().toString()}])
   }
   
-  function handleDeleteGoal(){
-    console.log("DELETE")
-  }
-
+ function handleDeleteGoal(id){
+  console.log('DELETE')
+  const deleteGoal = goals.filter((goal) => {return goal.key !== id} )
+  setGoals(deleteGoal)
+ }
   return(
   <View style={styles.container}>
     <GoalInput
@@ -26,9 +27,13 @@ export default function App() {
       data={goals}
       renderItem={ (itemData) => {
         return(
+       // <GoalItem
+        //itemData={itemData}
+        //OnDeleteItem={handleDeleteGoal}
         <GoalItem
         itemData={itemData}
         OnDeleteItem={handleDeleteGoal}
+        id={itemData.item.key}
         />)
       }}
 
